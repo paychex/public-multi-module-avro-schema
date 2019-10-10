@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }    }
+    dependencies {
+        classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:0.17.0"
+    }
+}
+
+allprojects {
+  repositories() {
+    mavenCentral()
+  }
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: "com.commercehub.gradle.plugin.avro"
+
+  sourceCompatibility = 1.8
+
+  sourceSets {
+    main {
+      resources {
+        srcDirs "src/main/avro"
+      }
+    }
+  }
+
+  dependencies {
+    compile "org.apache.avro:avro:1.9.1"
+  }
+}
+
+// todo: this is a work around for an apparent issue with the Avro plugin not honoring the dependency order
+//configure(subprojects.findAll {it.name != 'avro-schema-shared'}) {
+//    generateAvroProtocol.dependsOn(project(":avro-schema-shared").jar)
+//}

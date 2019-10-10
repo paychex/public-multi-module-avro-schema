@@ -1,0 +1,6 @@
+@namespace("com.example.shared")
+protocol SharedProtocol {
+  record SomethingShared {
+    string greeting;
+  }
+}

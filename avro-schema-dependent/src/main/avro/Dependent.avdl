@@ -1,0 +1,9 @@
+@namespace("com.example.dependent")
+protocol DependentProtocol {
+
+  import idl "Shared.avdl";
+
+  record ThisDependsOnTemporal {
+    com.example.shared.SomethingShared a;
+  }
+}

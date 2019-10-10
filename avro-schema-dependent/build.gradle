@@ -1,0 +1,12 @@
+group = "com.example.dependent"
+version = "0.0.1-SNAPSHOT"
+
+dependencies {
+  implementation(project(':avro-schema-shared')) {
+    // the dependency needs to be on the compile classpath for the Avro generator to
+    // "see" the imports, but this generated jar contains all of the classes
+    // from the dependencies, sort of as an uber-jar; so, so need to have projects
+    // pull in the dependent jars
+    transitive = false
+  }
+}
